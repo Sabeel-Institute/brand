@@ -8,7 +8,7 @@ skills for AI agents such as Claude, and reads just as well for people.
 
 | Skill | Use it for |
 |---|---|
-| [`sabeel-color-scheme`](skills/sabeel-color-scheme/SKILL.md) | The palette and the logo on any surface: the five colours and their proportions, readable text colours, the single light theme, and which logo version to use where |
+| [`sabeel-brand`](skills/sabeel-brand/SKILL.md) | The palette and the logo on any surface: the five colours and their proportions, readable text colours, the single light theme, and which logo version to use where |
 | [`sabeel-flyers`](skills/sabeel-flyers/SKILL.md) | Program flyers: what every flyer says, layout, formats, QR codes, and how to write dates, times, and names |
 
 ## Installing a skill
@@ -30,7 +30,7 @@ again.
 ## Logo files
 
 The logo files are in
-[`skills/sabeel-color-scheme/logo/`](skills/sabeel-color-scheme/logo/):
+[`skills/sabeel-brand/logo/`](skills/sabeel-brand/logo/):
 
 | File | What it is |
 |---|---|

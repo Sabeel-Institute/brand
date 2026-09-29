@@ -1,9 +1,9 @@
 ---
-name: sabeel-color-scheme
-description: Apply the Sabeel Institute brand palette (Option 1) and logo accurately and appropriately — the five colours, their roles and proportions, the accessibility-driven text and gold cuts, the single-light-theme rule, and which logo version to use where. Use when designing or building any Sabeel Institute surface (the kanban app, the time tracker, web pages, printed statements, illustrations, charts, icons).
+name: sabeel-brand
+description: Apply the Sabeel Institute brand accurately and appropriately — the Option 1 palette (the five colours, their roles and proportions, the accessibility-driven text and gold cuts, the single-light-theme rule) and the logo (which version to use where, small sizes, icons), with the logo files. Use when designing or building any Sabeel Institute surface (the kanban app, the time tracker, the recording app, web pages, flyers, printed statements, illustrations, charts, icons).
 ---
 
-# Sabeel Institute colour scheme
+# Sabeel Institute brand: colours and logo
 
 The brand palette is **"Option 1"** (designer, 2026-07-21). It supersedes the
 older colour-usage-guide JPG. The same five colours are used across every Sabeel
@@ -15,7 +15,7 @@ read, saturating raspberry into a background, or inventing a dark theme.
 
 The latest version of this skill, with the logo files, is in
 [Sabeel-Institute/brand](https://github.com/Sabeel-Institute/brand) under
-`skills/sabeel-color-scheme/`. Change the brand there first.
+`skills/sabeel-brand/`. Change the brand there first.
 
 ## The five brand colours
 

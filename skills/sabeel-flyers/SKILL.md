@@ -1,6 +1,6 @@
 ---
 name: sabeel-flyers
-description: Make or review a Sabeel Institute program flyer for print, WhatsApp, or Instagram — what every flyer must say and in what order, how the brand shows through a themed design, readable type and QR codes, formats, and how to write dates, times, and names. Use together with sabeel-color-scheme when designing, writing, or checking a flyer for a Sabeel class, series, camp, or event.
+description: Make or review a Sabeel Institute program flyer for print, WhatsApp, or Instagram — what every flyer must say and in what order, how the brand shows through a themed design, readable type and QR codes, formats, and how to write dates, times, and names. Use together with sabeel-brand when designing, writing, or checking a flyer for a Sabeel class, series, camp, or event.
 ---
 
 # Sabeel Institute flyers
@@ -9,7 +9,7 @@ Every Sabeel program (a class, series, camp, or gathering) is announced with a
 flyer. The same image is printed, shared on WhatsApp and Instagram, and shown on
 the program's page of the website, so it has to work on a wall and on a phone.
 This skill covers what a flyer says and how it is laid out. Colours and the
-logo come from the **sabeel-color-scheme** skill; read it too.
+logo come from the **sabeel-brand** skill; read it too.
 
 The latest version of this skill is in
 [Sabeel-Institute/brand](https://github.com/Sabeel-Institute/brand) under
@@ -52,7 +52,7 @@ mood. Recent flyers vary widely in colour, and that is fine. The brand stays
 constant through:
 
 - **The logo:** the main version on light backgrounds, the reverse version only
-  on dark ones, never recoloured (see sabeel-color-scheme).
+  on dark ones, never recoloured (see sabeel-brand).
 - **The information blocks:** the same content, in the order above.
 - **Readable type and contrast.**
 
