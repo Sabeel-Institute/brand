@@ -1,6 +1,6 @@
 ---
 name: sabeel-flyers
-description: Make or review a Sabeel Institute program flyer for print, WhatsApp, or Instagram — what every flyer must say and in what order, how the brand shows through a themed design, readable type and QR codes, formats, and how to write dates, times, and names. Use together with sabeel-brand when designing, writing, or checking a flyer for a Sabeel class, series, camp, or event.
+description: Make or review a Sabeel Institute program flyer for print, WhatsApp, or Instagram, and the program image the website needs — what every flyer must say and in what order, how the brand shows through a themed design, readable type and QR codes, formats and standard image sizes, and how to write dates, times, and names. Use together with sabeel-brand when designing, writing, or checking a flyer for a Sabeel class, series, camp, or event.
 ---
 
 # Sabeel Institute flyers
@@ -86,6 +86,26 @@ text.
 - Keep text and the QR code at least 5% in from every edge, so nothing is lost
   when the flyer is printed or cropped.
 - Export a PDF for printing and a PNG or high-quality JPG for sharing.
+
+## Images for the website
+
+The website uses two images for each program, each in one standard size, so it
+shows them as they are:
+
+| Image | Size | Where the website shows it |
+|---|---|---|
+| Flyer | US Letter portrait: 8.5 × 11 in, 2550 × 3300 px | Whole: on the program's page, in Past Programs, and enlarged |
+| Program image | 16:9 landscape: 1920 × 1080 px | On the program's card, at the top of its page, and in link previews on WhatsApp and social media |
+
+The program image is a photograph or artwork in the program's theme, such as
+a 16:9 version of the flyer's artwork, not the flyer itself:
+
+- At most a large title, and no small text: dates, times, and fees are on the
+  web page, and they change.
+- Keep anything important at least 5% in from every edge; link previews trim
+  a little from the top and bottom.
+- Any 16:9 preset works, such as Canva's "Presentation (16:9)". The website
+  rejects an image of any other shape.
 
 ## Writing
 
