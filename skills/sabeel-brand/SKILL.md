@@ -200,6 +200,17 @@ The swatch communicates the colour; the word communicates the word. This is the
 same cut as gold-as-text above, and it is easy to miss because most of the set is
 dark enough to hide it — you only see it on the light swatch, on a real screen.
 
+## Section and role icons
+
+When building Sabeel web pages or apps with distinct sections or role highlights—such as **"Meet the Teachers"** and **"From Student to Service"**—use distinct, realistic, and representative icons for each role to reflect real-life concepts rather than generic shapes or identical avatars.
+
+- **"Meet the Teachers" icon:** Use imagery representing instruction, scholarship, or guidance (such as an open book/mushaf, a teaching podium, or a teacher figure with an open text).
+- **"From Student to Service" icon:** Use imagery representing active learning transitioning into community service (such as a student with a notebook/scroll transitioning into hands in service or community outreach).
+- **Icon style and consistency:**
+  - Keep a uniform stroke weight and line style across all section icons on the same page.
+  - Use brand palette colours (such as Dark Raspberry `#83114F` or Soft Sage `#A8B89A`) for key strokes, with Antique Gold `#C6A15B` for small accents.
+  - Ensure icons maintain a clear contrast against Warm Ivory `#F6EBDD` or surface cards (`#FBF6F0`).
+
 ## The logo
 
 The logo (designer, 2026-09-28) replaced the earlier black-and-gold one. It is a
