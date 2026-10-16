@@ -94,8 +94,9 @@ Decided by Faisal on 2026-10-15:
 
 So:
 
-- **The address is `app-review@oursabeel.com` in every app.** It is reserved:
-  never a Workspace user. A reviewer cannot use a Workspace account: Google's
+- **The address is `app-review@oursabeel.com` in every app.** In Workspace it
+  is a group, never a user: it receives mail, and nobody can sign in to Google
+  as it. A reviewer cannot use a Workspace account: Google's
   login challenge on an unfamiliar device can only be waived by an admin for
   ten minutes, and review happens days later.
 - **Kanban and the Time Tracker:** a plain "Sign in with email" link under the
@@ -165,8 +166,12 @@ assignments. So, decided by Faisal on 2026-10-16, **each app adds two things**:
    rating forces the rating up.
 2. **"Report a problem"** under More (or Settings): the person says what or
    who they are reporting (the item or the person, and what is wrong, in their
-   own words), and it reaches the app's administrators, who answer within 24
-   hours by removing the content or disabling the account. Naming the item or
+   own words). The app's server emails it from `no-reply@oursabeel.com` ("Sabeel
+   Apps") to the group **`reports@oursabeel.com`**, with Reply-To set to the
+   reporter, and keeps a copy in the database as a record; nobody reviews
+   reports inside the apps. (`abuse@` is reserved by Google Workspace.) The
+   administrators answer within 24 hours by removing the content or disabling
+   the account. Naming the item or
    person meets Play's "report content and users" to the letter. The 24 hours
    is a promise the institute keeps.
 
@@ -214,8 +219,8 @@ listing.
   and a phone app pointing there is the account-creation pointer decision 1
   forbids. The support URL goes in the store listings only.
 - **Deletion by email**, to **`privacy@oursabeel.com`**, one address for every
-  app (decided 2026-08-18; it should be a Workspace group with two admins on
-  it). The policy states the process and the time it takes, and that
+  app (decided 2026-08-18): a Workspace group (created 2026-10-16, Faisal its
+  owner and member), which anyone on the web may email. The policy states the process and the time it takes, and that
   institutional records (cards, timesheets, academic records) are kept as the
   institute's records while the account and personal data are removed.
 - **Every third party is named**: Google (sign-in), Firebase and Google Cloud,
@@ -388,15 +393,17 @@ reviews.
 | Apple push key | One key (`X5R8FL94BC`) for every app of the team, the `APNS_KEY` secret in each Firebase project |
 | Google Play | Organisation developer account. Publishing service account `sabeel-play-publisher@sabeel-institute-kanban.iam.gserviceaccount.com`, given "Release apps to testing tracks" per app; it cannot release to production until Play Console also gives it "Release to production" for that app (or the release is promoted in the console) |
 | Play testers | The email list "Sabeel staff", account-wide, ticked per app |
-| Reviewer address | `app-review@oursabeel.com`, reserved, never a Workspace user |
-| Privacy address | `privacy@oursabeel.com` |
+| Reviewer address | `app-review@oursabeel.com`: the reviewers' login inside each app; in Workspace a **group** (so the address receives mail, such as a set-password link) and never a user, so nobody can sign in to Google as it |
+| Privacy address | `privacy@oursabeel.com`, a group anyone may email |
+| Reports address | `reports@oursabeel.com`, a group; "Report a problem" emails land here |
+| Sender | `no-reply@oursabeel.com` ("Sabeel Apps"), a Workspace user nobody signs in to. Each app's server sends as it through domain-wide delegation, scope `gmail.send` only, with no password or key: service accounts `report-mailer@<project>.iam.gserviceaccount.com` in `oursabeel-lms`, `sabeel-institute-kanban` and `sabeel-institute-time-tracker` |
 
 Secrets (keystores, keys, the reviewer's password) live in the owner's vault,
 never in a repository.
 
 ## Open decisions
 
-- Confirm `privacy@oursabeel.com` exists as a Workspace group with two admins.
+- Who else joins `privacy@` and `reports@` besides Faisal.
 - Texas SB 2420 (decision 5): ask a lawyer before the first public listing.
 - Who reads each privacy policy who did not write it.
 - Store listing copy, screenshots and category, per app.
