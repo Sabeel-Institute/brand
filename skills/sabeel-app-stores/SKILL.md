@@ -281,8 +281,13 @@ app's own certificate.
   unlisted. Production is fully reviewed against Play's policies, including
   the content rules in decision 4. The developer account is an organisation,
   so the 12-testers-for-14-days rule does not apply. Play requires blocking
-  only for direct messages and mentions ("tagging, mentioning"): an app with
-  @mentions (Kanban) answers that in its own `docs/STORE-RELEASE.md`.
+  only for direct messages and mentions ("tagging, mentioning"). Decided by
+  Faisal on 2026-10-16 for Kanban's @mentions: argue first. Blocking is all or
+  nothing: there is no per-person block; a person who wants someone stopped
+  reports them, and an administrator disables that account, which removes them
+  from the service entirely. Mention notifications can also be turned off
+  altogether. A per-person "mute mentions from this person" is built only if
+  Google objects.
 
 ### 10. Small things each store checks
 
