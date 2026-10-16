@@ -397,7 +397,7 @@ reviews.
 | Reviewer address | `apps-reviewer@oursabeel.com`: the reviewers' login inside each app; in Workspace a **group** (so the address receives mail, such as a set-password link) and never a user, so nobody can sign in to Google as it |
 | Privacy address | `privacy@oursabeel.com`, a group anyone may email |
 | Reports address | `apps-reports@oursabeel.com`, a group; "Report a problem" emails land here |
-| Sender | `apps-noreply@oursabeel.com` ("Sabeel Apps No Reply"), a Workspace user nobody signs in to. Each app's server sends as it through domain-wide delegation, scope `gmail.send` only, with no password or key: service accounts `report-mailer@<project>.iam.gserviceaccount.com` in `oursabeel-lms`, `sabeel-institute-kanban` and `sabeel-institute-time-tracker` |
+| Sender | `apps-noreply@oursabeel.com` ("Sabeel Apps No Reply"), a Workspace user nobody signs in to. Each app's server sends as it through domain-wide delegation, scope `gmail.send` only, with no password or key: service accounts `report-mailer@<project>.iam.gserviceaccount.com` in `oursabeel-lms`, `sabeel-institute-kanban` and `sabeel-institute-time-tracker`, each authorised in the Admin console's Domain-wide delegation. Each project has the Gmail API on, and whatever sends (the app's function) needs `roles/iam.serviceAccountTokenCreator` on its project's `report-mailer` to sign the delegation token. Proved 2026-10-16: each sent a test to `apps-reports@` |
 
 Secrets (keystores, keys, the reviewer's password) live in the owner's vault,
 never in a repository.
