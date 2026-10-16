@@ -118,8 +118,11 @@ So:
   update is reviewed again. Data that ages (the LMS's due dates) is renewed
   before each submission.
 - Apple asks for credentials for each account type. Staff roles here are
-  granted only to the institute's Workspace accounts; the review notes say so
-  and describe what staff can do.
+  granted only to the institute's Workspace accounts, which a reviewer cannot
+  use; the review notes say so and describe what staff can do. If a reviewer
+  still asks for staff access, answer with a short video of the staff screens
+  (the LMS's staff help films are one), Apple's usual alternative, not a
+  password account with a staff role.
 
 ### 4. Content belongs to the institute: rules and a report, no blocking
 
@@ -130,10 +133,15 @@ Both stores treat that as user-generated content:
 - Apple 1.2 asks for a way to filter objectionable material, to report it, to
   "block abusive users from the service", and published contact details, and
   has no exception for closed, institutional apps.
-- Google Play names this case: apps "exclusively used within a specific school
-  or company" must provide "in-app functionality to report content and users",
-  and users accept terms before posting. Blocking is required only for direct
-  messages and mentions.
+- Google Play defines user-generated content as content "visible to or
+  accessible by at least a subset of the app's users" (not "public" users),
+  and names this case: apps "exclusively used within a specific school or
+  company" must provide "in-app functionality to report content and users",
+  and users accept terms before posting. Blocking is required for "1:1 user
+  interaction with specific users (for example, direct messaging, tagging,
+  mentioning)". The policy has no exemption for enterprise, internal or
+  private apps (checked against the policy page, 2026-10-16); advice that
+  closed apps are exempt is wrong.
 
 These apps are not public forums. Nobody can sign up through them, everything
 posted is seen only by members an admin put in the same class, board or team,
@@ -155,10 +163,12 @@ assignments. So, decided by Faisal on 2026-10-16, **each app adds two things**:
 
    The rules state no minimum age: a stated age above Apple's calculated
    rating forces the rating up.
-2. **"Report a problem"** under More (or Settings): the person types what is
-   wrong, and it reaches the app's administrators, who answer within 24 hours
-   by removing the content or disabling the account. The 24 hours is a promise
-   the institute keeps.
+2. **"Report a problem"** under More (or Settings): the person says what or
+   who they are reporting (the item or the person, and what is wrong, in their
+   own words), and it reaches the app's administrators, who answer within 24
+   hours by removing the content or disabling the account. Naming the item or
+   person meets Play's "report content and users" to the letter. The 24 hours
+   is a promise the institute keeps.
 
 And deliberately not:
 
