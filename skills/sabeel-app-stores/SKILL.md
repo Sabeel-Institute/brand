@@ -94,7 +94,8 @@ Decided by Faisal on 2026-10-15:
 
 So:
 
-- **The address is `app-review@oursabeel.com` in every app.** In Workspace it
+- **The address is `apps-reviewer@oursabeel.com` in every app** (the
+  Workspace accounts and groups the apps use are named `apps-…`). In Workspace it
   is a group, never a user: it receives mail, and nobody can sign in to Google
   as it. A reviewer cannot use a Workspace account: Google's
   login challenge on an unfamiliar device can only be waived by an admin for
@@ -166,9 +167,9 @@ assignments. So, decided by Faisal on 2026-10-16, **each app adds two things**:
    rating forces the rating up.
 2. **"Report a problem"** under More (or Settings): the person says what or
    who they are reporting (the item or the person, and what is wrong, in their
-   own words). The app's server emails it from `no-reply@oursabeel.com` ("Sabeel
-   Apps") to the group **`reports@oursabeel.com`**, with Reply-To set to the
-   reporter, and keeps a copy in the database as a record; nobody reviews
+   own words). The app's server emails it from `apps-noreply@oursabeel.com`
+   ("Sabeel Apps No Reply") to the group **`apps-reports@oursabeel.com`**, with
+   Reply-To set to the reporter, and keeps a copy in the database as a record; nobody reviews
    reports inside the apps. (`abuse@` is reserved by Google Workspace.) The
    administrators answer within 24 hours by removing the content or disabling
    the account. Naming the item or
@@ -346,7 +347,7 @@ below. It is an ordinary
 [member | student] account made by an administrator. [App-specific: what it
 can see and do.] Staff and administrator roles are granted only to the
 institute's own Workspace accounts.
-Email: app-review@oursabeel.com   Password: <from the vault>
+Email: apps-reviewer@oursabeel.com   Password: <from the vault>
 
 All content is visible only to members an administrator has added to the
 same [class | board | team]. Nothing is public, searchable or discoverable,
@@ -393,17 +394,17 @@ reviews.
 | Apple push key | One key (`X5R8FL94BC`) for every app of the team, the `APNS_KEY` secret in each Firebase project |
 | Google Play | Organisation developer account. Publishing service account `sabeel-play-publisher@sabeel-institute-kanban.iam.gserviceaccount.com`, given "Release apps to testing tracks" per app; it cannot release to production until Play Console also gives it "Release to production" for that app (or the release is promoted in the console) |
 | Play testers | The email list "Sabeel staff", account-wide, ticked per app |
-| Reviewer address | `app-review@oursabeel.com`: the reviewers' login inside each app; in Workspace a **group** (so the address receives mail, such as a set-password link) and never a user, so nobody can sign in to Google as it |
+| Reviewer address | `apps-reviewer@oursabeel.com`: the reviewers' login inside each app; in Workspace a **group** (so the address receives mail, such as a set-password link) and never a user, so nobody can sign in to Google as it |
 | Privacy address | `privacy@oursabeel.com`, a group anyone may email |
-| Reports address | `reports@oursabeel.com`, a group; "Report a problem" emails land here |
-| Sender | `no-reply@oursabeel.com` ("Sabeel Apps"), a Workspace user nobody signs in to. Each app's server sends as it through domain-wide delegation, scope `gmail.send` only, with no password or key: service accounts `report-mailer@<project>.iam.gserviceaccount.com` in `oursabeel-lms`, `sabeel-institute-kanban` and `sabeel-institute-time-tracker` |
+| Reports address | `apps-reports@oursabeel.com`, a group; "Report a problem" emails land here |
+| Sender | `apps-noreply@oursabeel.com` ("Sabeel Apps No Reply"), a Workspace user nobody signs in to. Each app's server sends as it through domain-wide delegation, scope `gmail.send` only, with no password or key: service accounts `report-mailer@<project>.iam.gserviceaccount.com` in `oursabeel-lms`, `sabeel-institute-kanban` and `sabeel-institute-time-tracker` |
 
 Secrets (keystores, keys, the reviewer's password) live in the owner's vault,
 never in a repository.
 
 ## Open decisions
 
-- Who else joins `privacy@` and `reports@` besides Faisal.
+- Who else joins `privacy@` and `apps-reports@` besides Faisal.
 - Texas SB 2420 (decision 5): ask a lawyer before the first public listing.
 - Who reads each privacy policy who did not write it.
 - Store listing copy, screenshots and category, per app.
