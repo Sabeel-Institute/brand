@@ -162,8 +162,9 @@ assignments. So, decided by Faisal on 2026-10-16, **each app adds two things**:
    > **Before you continue.** [App] is for Sabeel Institute's staff [and
    > students], and what you post is seen only by members of your class, board
    > or team. By continuing you agree to the institute's rules: post only what
-   > belongs to your work or class, and nothing abusive, harassing, hateful,
-   > sexual or otherwise objectionable. The institute does not tolerate either.
+   > belongs to your work [or class], post nothing abusive, harassing, hateful,
+   > sexual or otherwise objectionable, and never abuse another member. The
+   > institute tolerates neither.
    > Administrators may remove content and suspend accounts that break these
    > rules. To report something or someone, use **Report a problem** in
    > [More / Settings]; administrators respond within 24 hours.
