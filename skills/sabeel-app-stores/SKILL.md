@@ -119,6 +119,11 @@ So:
 - **Keep it alive.** Apple: the demo account "must not expire", and every
   update is reviewed again. Data that ages (the LMS's due dates) is renewed
   before each submission.
+- **Let the reviewer see the rules.** Checking the account before a submission
+  means agreeing to the institute's rules (decision 4), and then App Review
+  never sees that screen. After the check, clear the account's
+  `rulesAcceptedAt` and `rulesVersion` (with the Admin API, on its profile
+  document), so the reviewer meets the rules screen first.
 - Apple asks for credentials for each account type. Staff roles here are
   granted only to the institute's Workspace accounts, which a reviewer cannot
   use; the review notes say so and describe what staff can do. If a reviewer
@@ -376,7 +381,8 @@ sign-in screen) states the address, the process and what is retained.
 ## Submitting
 
 **iPhone (App Store Connect), once per app:** the app's TestFlight build
-checked on a phone first; App Privacy; age rating; description, keywords,
+checked on a phone first, then the review account's rules acceptance cleared
+(decision 3); App Privacy; age rating; description, keywords,
 category, support URL and privacy policy URL; screenshots at the required
 sizes; App Review Information (contact, sign-in required, the review account,
 the notes above); manual release. Then the Account Holder files the unlisted
