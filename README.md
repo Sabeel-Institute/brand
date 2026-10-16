@@ -1,8 +1,9 @@
 # Sabeel Institute brand
 
 The colours, logo, and design guidance for everything Sabeel Institute makes:
-the website, the apps, flyers, and printed material. The guidance is written as
-skills for AI agents such as Claude, and reads just as well for people.
+the website, the apps, flyers, and printed material, and the shared method for
+getting the apps onto phones. The guidance is written as skills for AI agents
+such as Claude, and reads just as well for people.
 
 ## Skills
 
@@ -10,6 +11,7 @@ skills for AI agents such as Claude, and reads just as well for people.
 |---|---|
 | [`sabeel-brand`](skills/sabeel-brand/SKILL.md) | The palette and the logo on any surface: the five colours and their proportions, readable text colours, the single light theme, and which logo version to use where |
 | [`sabeel-flyers`](skills/sabeel-flyers/SKILL.md) | Program flyers: what every flyer says, layout, formats, QR codes, and how to write dates, times, and names |
+| [`sabeel-app-stores`](skills/sabeel-app-stores/SKILL.md) | The apps on the App Store and Google Play: the decisions that keep review simple (no account creation in the phone apps, the reviewer's account, the institute's rules and a report form, adults only), how we answer each store, the shared Apple and Play accounts, and the submission checklists |
 
 ## Installing a skill
 
