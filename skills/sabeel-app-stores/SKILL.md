@@ -21,8 +21,8 @@ app.
 | App | Repository | Who uses it | How they sign in |
 |---|---|---|---|
 | Sabeel Institute LMS | `Sabeel-Institute/lms` | Staff and students (all adults) | Staff: Google Workspace (`@oursabeel.com`). Students: email and password accounts that staff create |
-| Sabeel Kanban | `faisal-shah/sabeel-institute-kanban` | Staff | Google Workspace |
-| Sabeel Time Tracker | `faisal-shah/sabeel-institute-time-tracker` | Staff and volunteers with `@oursabeel.com` accounts | Google Workspace |
+| Sabeel Kanban | `Sabeel-Institute/sabeel-institute-kanban` | Staff | Google Workspace |
+| Sabeel Time Tracker | `Sabeel-Institute/sabeel-institute-time-tracker` | Staff and volunteers with `@oursabeel.com` accounts | Google Workspace |
 
 Each app also has a web app, which is where accounts are made.
 
