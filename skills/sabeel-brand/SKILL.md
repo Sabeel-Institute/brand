@@ -233,6 +233,35 @@ The files are in this skill's `logo/` folder:
 - `sabeel-icon.png`: the icon, 1024 × 1024 px: the calligraphy across 76% of
   the width of an opaque ivory square. Scale it down for favicons and app
   icons.
+- `sabeel-mark-earlier.png`: the calligraphy of the logo before 2026-09-28,
+  black with a gold stroke, its wordmark removed (1536 × 949 px). Only the
+  staff apps' icons use it; nothing new should.
+
+### The apps' icons
+
+Every Sabeel app's icon is made by this skill's `tools/make-app-icons.py`
+and written into that app's repository: `app/assets/icon.png`,
+`adaptive-icon.png`, `favicon.png`, and the Android launcher resources Gradle
+compiles (each app commits `android/`, so `app.json` alone changes nothing a
+build sees). Nothing in an app's icon is edited by hand.
+
+```sh
+uv run tools/make-app-icons.py lms --repo <path to the lms repository>
+uv run tools/make-app-icons.py lms --repo <path> --check   # compare, write nothing
+```
+
+- **The LMS**, the app the public installs from the stores, carries the
+  brand's own icon: the logo's calligraphy alone on ivory, cut from
+  `sabeel-logo.png` above its wordmark on every run. The square icon has it
+  across 76% of the tile, like `sabeel-icon.png`; Android's adaptive
+  foreground has it across 76% of the 72dp a launcher shows.
+- **The staff apps** (`kanban`, `timetracker`) carry the earlier mark with a
+  raspberry badge saying which app: a board, a stopwatch.
+
+`--check` proves no ink leaves the circle every Android launcher keeps and no
+badge hides calligraphy, and lists any of the app's icon files that differ
+from what the generator makes. Run it after changing the logo, the generator
+or an app's icons.
 
 ## Quick do / don't
 

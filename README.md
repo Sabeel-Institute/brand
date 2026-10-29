@@ -39,6 +39,9 @@ The logo files are in
 | `sabeel-logo.png` | The logo on a transparent background, for ivory and other light backgrounds |
 | `sabeel-logo-ivory.png` | The ivory version, only for dark or raspberry backgrounds |
 | `sabeel-icon.png` | The calligraphy on an ivory square, 1024 × 1024 px, for favicons, app icons, and profile pictures |
+| `sabeel-mark-earlier.png` | The calligraphy before 2026-09-28, black, which only the staff apps' icons still use |
+
+The apps' icons come from [`skills/sabeel-brand/tools/make-app-icons.py`](skills/sabeel-brand/tools/make-app-icons.py), which writes them into each app's repository (the `sabeel-brand` skill, "The apps' icons").
 
 The Sabeel Institute name and logo belong to Sabeel Institute. Use them only
 for Sabeel Institute's work.
