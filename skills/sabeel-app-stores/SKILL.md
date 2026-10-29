@@ -29,11 +29,14 @@ Each app also has a web app, which is where accounts are made.
 | | iPhone | Android |
 |---|---|---|
 | Now | TestFlight, internal testers only | Google Play internal testing, plus an APK on the app's download page |
-| Destination, every app | The App Store, **unlisted**, after App Review. Kanban goes first and alone; the others follow once it is through | Google Play **production**, a public listing (Play has no unlisted) |
+| Destination, the LMS | The App Store, **unlisted**, after App Review, as version 1.0.0 | Google Play **production**, a public listing in the United States only (Play has no unlisted) |
+| Destination, Kanban and the Time Tracker | TestFlight, as now | Play internal testing, as now |
 
-Decided by Faisal on 2026-10-16: every app goes to the unlisted App Store and
-to public Play production, and stays on TestFlight and Play internal testing
-until then.
+Decided by Faisal on 2026-10-29: the LMS goes to both stores, first and
+alone, because students, who are not institute staff, must be able to install
+it. Kanban and the Time Tracker are staff-only, with a set number of accounts,
+and stay on TestFlight and Play internal testing. Every app keeps the
+decisions below, so either could follow the LMS without rework.
 
 ## The decisions
 
@@ -273,18 +276,25 @@ app's own certificate.
   users, no review, each build expires after 90 days. Staff are invited to App
   Store Connect (Developer role), accept, and are then added to the app's
   internal group, which gets every build.
-- **iPhone next: the App Store, unlisted.** A full App Review once, then a link
-  that is not searchable, with no expiry and no install cap. The Account Holder
-  files Apple's unlisted request after the app is submitted, and the app must
-  not be a beta. A public listing for an institution-only app risks a 3.2
-  rejection; unlisted is the route Apple intends.
+- **iPhone next (the LMS): the App Store, unlisted.** A full App Review once,
+  then a link that is not searchable, with no expiry and no install cap. The
+  review notes say the app is intended for unlisted distribution; the Account
+  Holder files Apple's unlisted request after the version is submitted (Apple
+  declines one for an app not yet submitted), and the version stays on manual
+  release until Apple approves it, since releasing earlier publishes it
+  publicly. Apple declines an app "in a beta or prerelease state", so the
+  first store version is 1.0.0, not 0.x. A public listing for an
+  institution-only app risks a 3.2 rejection; unlisted is the route Apple
+  intends.
 - **Android now: Google Play internal testing**, with the account-wide email
   list "Sabeel staff" ticked on each app's Internal testing → Testers page.
   Testers join through that page's link (Play sends no email). Up to 100
   testers. Internal tests "might not be subject to standard Play policy or
   security reviews".
-- **Android next: Google Play production**, a public listing, since Play has no
-  unlisted. Production is fully reviewed against Play's policies, including
+- **Android next (the LMS): Google Play production**, a public listing in the
+  United States only, since Play has no unlisted: a closed testing track would
+  need every student's Google account on a tester list, and a managed Google
+  Play private app installs only on devices the institute manages. Production is fully reviewed against Play's policies, including
   the content rules in decision 4. The developer account is an organisation,
   so the 12-testers-for-14-days rule does not apply. Play requires blocking
   only for direct messages and mentions ("tagging, mentioning"). Decided by
@@ -304,6 +314,16 @@ app's own certificate.
   an upload.
 - **Xcode and SDK:** uploads must be built with Xcode 26 and the iOS 26 SDK
   (GitHub's `macos-26` runners).
+- **Purpose strings:** each one the app's `Info.plist` carries says what the
+  app does with it. `expo-image-picker` adds photo library and microphone
+  strings by default ("Allow $(PRODUCT_NAME) to access your photos"); an app
+  that does not use one turns it off in the plugin's options
+  (`photosPermission: false`), since a vague string is a 5.1.1(ii) rejection.
+  Check with `npx expo config --type introspect`.
+- **EU Digital Services Act status:** App Store Connect requires it even of an
+  app not offered in the EU (Business → Agreements, Compliance). With the EU
+  left out, the answer is "not a trader".
+- **Review contact phone:** `+1…` form; App Store Connect refuses any other.
 - **Play target API:** 36 (each app's Gradle config).
 - **Android developer verification** (worldwide in 2027): an APK installed from
   outside Play needs its package and signing key registered in Play Console.
@@ -385,15 +405,33 @@ sign-in screen) states the address, the process and what is retained.
 checked on a phone first, then the review account's rules acceptance cleared
 (decision 3); App Privacy; age rating; description, keywords,
 category, support URL and privacy policy URL; screenshots at the required
-sizes; App Review Information (contact, sign-in required, the review account,
-the notes above); manual release. Then the Account Holder files the unlisted
+sizes (1320 × 2868 and 1206 × 2622: Apple's page names each as required in
+a different place), PNG with no alpha channel, showing the app in use, never
+the sign-in screen (2.3.3); App Review Information (contact, sign-in required,
+the review account, the notes above, a video of the staff screens a reviewer
+cannot reach); manual release. Then the Account Holder files the unlisted
 request.
+
+App Privacy, the EU Digital Services Act status, availability on Mac and
+Vision Pro, and the unlisted request exist only in the App Store Connect web
+console. Everything else has an App Store Connect API resource, which the
+API key in the owner's vault reaches.
 
 **Android (Play Console), before production:** App content (privacy policy
 URL, App access, ads, content rating, target audience, Data safety); the store
 listing (short and full description, icon, feature graphic, phone
 screenshots, category, contact email); then a production release, which Play
-reviews.
+reviews in up to seven days and cannot stage the first time.
+
+Phone screenshots: a long side at most twice the short one, so 1080 × 1920,
+not a 20:9 phone's 1080 × 2400. A media-playback foreground service needs a
+declaration with a link to a video of a user starting playback. App content,
+store settings (category, tags), countries and permission declarations exist
+only in Play Console; the listing, graphics, contact details, Data safety and
+releases have Play Developer API resources, which the publishing service
+account reaches once Play Console gives it "Manage store presence" and
+"Release to production" for that app. Each app's `docs/STORE-RELEASE.md`
+carries every field and its answer.
 
 ## Shared accounts and assets
 
