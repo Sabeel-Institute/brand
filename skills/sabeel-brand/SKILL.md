@@ -234,8 +234,8 @@ The files are in this skill's `logo/` folder:
   the width of an opaque ivory square. Scale it down for favicons and app
   icons.
 - `sabeel-mark-earlier.png`: the calligraphy of the logo before 2026-09-28,
-  black with a gold stroke, its wordmark removed (1536 × 949 px). Only the
-  staff apps' icons use it; nothing new should.
+  black with a gold stroke, its wordmark removed (1536 × 949 px): the mark
+  of the apps' icons, beside each app's badge. Nothing else uses it.
 
 ### The apps' icons
 
@@ -250,16 +250,17 @@ uv run tools/make-app-icons.py lms --repo <path to the lms repository>
 uv run tools/make-app-icons.py lms --repo <path> --check   # compare, write nothing
 ```
 
-- **The LMS**, the app the public installs from the stores, carries the
-  brand's own icon: the logo's calligraphy alone on ivory, cut from
-  `sabeel-logo.png` above its wordmark on every run. The square icon has it
-  across 76% of the tile, like `sabeel-icon.png`; Android's adaptive
-  foreground has it across 76% of the 72dp a launcher shows.
-- **The staff apps** (`kanban`, `timetracker`) carry the earlier mark with a
-  raspberry badge saying which app: a board, a stopwatch.
+Every app carries the same mark, the calligraphy before 2026-09-28
+(`sabeel-mark-earlier.png`), with a raspberry badge saying which app: a
+mortarboard (`lms`), a board (`kanban`), a stopwatch (`timetracker`). One
+family, told apart by the badge. Android's adaptive foreground keeps the
+composition inside the central 72dp a launcher shows; the square icon (the
+iPhone, an older launcher, the Play listing, a browser tab) shows the whole
+tile, so it draws the composition 1.35 times larger, 74% of the width.
 
-`--check` proves no ink leaves the circle every Android launcher keeps and no
-badge hides calligraphy, and lists any of the app's icon files that differ
+`--check` proves no ink leaves the circle every Android launcher keeps, no
+badge hides calligraphy and the square icon stays clear of its corners, and
+lists any of the app's icon files that differ
 from what the generator makes. Run it after changing the logo, the generator
 or an app's icons.
 
