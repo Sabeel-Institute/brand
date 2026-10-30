@@ -15,13 +15,11 @@ Every Sabeel app's icon comes from here, beside the logo it is drawn from.
 
 THE ICONS
 ---------
-* The LMS, the app the public installs from the stores, carries the brand's
-  own icon: the logo's raspberry calligraphy alone, centred on Warm Ivory, no
-  badge. The calligraphy is cut from `logo/sabeel-logo.png` above its
-  wordmark each run, so no second copy of it exists.
-* The staff apps carry the earlier black mark (`logo/sabeel-mark-earlier.png`,
-  the lockup before 2026-09-28 with its text removed) and a Dark Raspberry
-  badge saying which app: a board (Kanban), a stopwatch (the Time Tracker).
+Every app carries one mark, the logo's calligraphy before 2026-09-28 in black
+with its gold stroke (`logo/sabeel-mark-earlier.png`, the lockup's text
+removed), and a Dark Raspberry badge saying which app: a mortarboard (the
+LMS), a board (Kanban), a stopwatch (the Time Tracker). One family, told apart
+by the badge, on a phone that holds all three.
 
 WHAT IT WRITES
 --------------
@@ -35,6 +33,13 @@ density, legacy square and round icons at 48dp, the two `mipmap-anydpi-v26`
 XMLs and an `iconBackground` colour. A later prebuild is then a no-op on icons.
 iOS takes `icon.png` through `app.json` when `ios/` is generated.
 
+The adaptive foreground and the square icon differ in size. A launcher shows
+only the central 72dp of the foreground, so the composition fills that; the
+iPhone, an older Android launcher, the Play listing and a browser tab show the
+whole square, where the same composition left a wide empty border (55% of the
+width). The square icon draws it 1.35 times larger, 74% of the width, as the
+brand's own icon (76%), and `--check` proves it stays clear of the corners.
+
 THE GEOMETRY IS MEASURED, NOT CHOSEN
 ------------------------------------
 An adaptive icon's foreground fills the whole 108dp layer, of which only the
@@ -42,10 +47,7 @@ central 72dp is guaranteed to survive the launcher's mask: 66.67%, so on this
 1024 canvas the safe radius is 341. `--check` re-proves on every run that no
 ink leaves that circle and that no badge hides any calligraphy.
 
-* The LMS: the square icon has the calligraphy across 76% of the tile, as the
-  brand's `logo/sabeel-icon.png` does; the adaptive foreground has it across
-  76% of the 72dp a launcher shows, so the two read alike.
-* The badged icons: each bound was found by rendering candidates and counting
+Each bound of the badge was found by rendering candidates and counting
   pixels. A 410px badge hides no calligraphy (418 starts cutting the sweep);
   the mark sits low (at cy=643 its descender leaves the circle) to free the
   upper arc; the badge's bearing is 38 degrees (36 already hides 12px). Mark
@@ -82,15 +84,16 @@ MARK_W = 507
 MARK_CY = 637
 BEARING = 38  # degrees above horizontal, from centre
 RING = 14  # ivory separation between badge and mark
-# The LMS
-ICON_SHARE = 0.76  # the brand icon's: calligraphy width over what is seen
+# The square icon: the composition drawn larger, since nothing crops it.
+SQUARE_SCALE = 1.35
+# The square icon's ink stays inside this radius: the iPhone's rounded corner
+# keeps about 600 from centre along the badge's bearing, so 480 leaves room.
+SQUARE_R = 480
 
-LOGO_DIR = Path(__file__).resolve().parent.parent / "logo"
-EARLIER_MARK = LOGO_DIR / "sabeel-mark-earlier.png"
-LOGO = LOGO_DIR / "sabeel-logo.png"
+EARLIER_MARK = Path(__file__).resolve().parent.parent / "logo" / "sabeel-mark-earlier.png"
 
-# Each app's badge glyph; None is the brand's own icon, with no badge.
-APPS = {"lms": None, "kanban": "board", "timetracker": "stopwatch"}
+# Each app's badge glyph.
+APPS = {"lms": "cap", "kanban": "board", "timetracker": "stopwatch"}
 
 # Density buckets, and the baseline sizes @expo/prebuild-config uses.
 DENSITIES = {"mdpi": 1, "hdpi": 1.5, "xhdpi": 2, "xxhdpi": 3, "xxxhdpi": 4}
@@ -103,18 +106,6 @@ ADAPTIVE_XML = """<?xml version="1.0" encoding="utf-8"?>
     <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
 </adaptive-icon>
 """
-
-
-def calligraphy() -> Image.Image:
-    """The logo's calligraphy: everything above the first clear band of rows, cropped to its ink."""
-    logo = Image.open(LOGO).convert("RGBA")
-    rows = (np.array(logo.getchannel("A")) > 16).any(axis=1)
-    inked = np.flatnonzero(rows)
-    gaps = np.flatnonzero(np.diff(inked) > 20)
-    if not len(gaps):
-        sys.exit(f"{LOGO}: no clear band between the calligraphy and the wordmark")
-    top = logo.crop((0, 0, logo.width, int(inked[gaps[0]]) + 1))
-    return top.crop(top.getchannel("A").getbbox())
 
 
 def data_uri(img: Image.Image) -> str:
@@ -136,6 +127,16 @@ def badge_glyph(kind: str, cx: float, cy: float, r: float) -> str:
             '<path d="M0 -46 v10"/>'  # stem
             '<path d="M0 8 v-24 M0 8 h20"/>'  # hands
         )
+    elif kind == "cap":
+        # A mortarboard: the board, the cap beneath it, the tassel.
+        g += (
+            f'<g fill="{ON_PLUM}" stroke="none">'
+            '<path d="M-62 -14 L0 -42 L62 -14 L0 14 Z"/>'
+            '<path d="M-36 2 V26 C-36 40 36 40 36 26 V2 L0 18 Z"/>'
+            '<circle cx="48" cy="30" r="7"/>'
+            "</g>"
+            '<path d="M48 -8 V22"/>'
+        )
     elif kind == "board":
         # Three columns at different fills: a board, still legible as bars at 48dp.
         g += (
@@ -150,36 +151,34 @@ def badge_glyph(kind: str, cx: float, cy: float, r: float) -> str:
     return g + "</g>"
 
 
-def icon_svg(mark: Image.Image, kind: str | None, *, background: bool = True, badge: bool = True) -> str:
-    """background=False yields the adaptive foreground layer (transparent)."""
-    if kind is None:
-        w = ICON_SHARE * (CANVAS if background else 2 * SAFE_R)
-        cy = CANVAS / 2
-    else:
-        w, cy = MARK_W, MARK_CY
-    h = w * mark.height / mark.width
+def icon_svg(mark: Image.Image, kind: str, *, background: bool = True, badge: bool = True,
+             scale: float = 1.0) -> str:
+    """background=False yields the adaptive foreground layer (transparent); `scale` enlarges the composition about the centre."""
+    h = MARK_W * mark.height / mark.width
+    c = CANVAS / 2
     parts = [
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" '
         f'width="{CANVAS}" height="{CANVAS}" viewBox="0 0 {CANVAS} {CANVAS}">'
     ]
     if background:
         parts.append(f'<rect width="{CANVAS}" height="{CANVAS}" fill="{IVORY}"/>')
+    parts.append(f'<g transform="translate({c},{c}) scale({scale}) translate({-c},{-c})">')
     parts.append(
-        f'<image x="{(CANVAS - w) / 2}" y="{cy - h / 2}" '
-        f'width="{w}" height="{h}" xlink:href="{data_uri(mark)}"/>'
+        f'<image x="{(CANVAS - MARK_W) / 2}" y="{MARK_CY - h / 2}" '
+        f'width="{MARK_W}" height="{h}" xlink:href="{data_uri(mark)}"/>'
     )
-    if kind is not None and badge:
+    if badge:
         # Tangent to the safe circle: a bigger badge walks inward along the same
         # bearing, which is the only direction with room.
         t = math.radians(BEARING)
         d = SAFE_R - BADGE_R - 4
-        bx, by = CANVAS / 2 + d * math.cos(t), CANVAS / 2 - d * math.sin(t)
+        bx, by = c + d * math.cos(t), c - d * math.sin(t)
         # The ring keeps the badge legible where it passes near a stroke; it is
         # drawn even on the transparent layer, so the mark never touches it.
         parts.append(f'<circle cx="{bx}" cy="{by}" r="{BADGE_R + RING}" fill="{IVORY}"/>')
         parts.append(f'<circle cx="{bx}" cy="{by}" r="{BADGE_R}" fill="{PLUM}"/>')
         parts.append(badge_glyph(kind, bx, by, BADGE_R))
-    parts.append("</svg>")
+    parts.append("</g></svg>")
     return "".join(parts)
 
 
@@ -192,19 +191,19 @@ def on_ivory(img: Image.Image) -> np.ndarray:
     return np.array(Image.alpha_composite(Image.new("RGBA", img.size, IVORY), img).convert("RGB")).astype(int)
 
 
-def geometry(mark: Image.Image, kind: str | None) -> tuple[float, int]:
-    """(farthest ink from centre on the adaptive foreground, calligraphy pixels a badge hides)."""
+def geometry(mark: Image.Image, kind: str) -> tuple[float, int, float]:
+    """(farthest ink from centre on the adaptive foreground, calligraphy pixels the badge hides,
+    farthest ink on the square icon)."""
     ivory = np.array([246, 235, 221])
     yy, xx = np.mgrid[0:CANVAS, 0:CANVAS]
     radius = np.sqrt((xx - CANVAS / 2) ** 2 + (yy - CANVAS / 2) ** 2)
     full = on_ivory(render(icon_svg(mark, kind, background=False)))
     ink = np.abs(full - ivory).sum(axis=2) > 40
-    if kind is None:
-        return float(radius[ink].max()), 0
+    square = np.abs(on_ivory(render(icon_svg(mark, kind, scale=SQUARE_SCALE))) - ivory).sum(axis=2) > 40
     bare = on_ivory(render(icon_svg(mark, kind, background=False, badge=False)))
     dark = (np.abs(bare - ivory).sum(axis=2) > 40) & (bare.sum(axis=2) < 300)
     still = ink & (full.sum(axis=2) < 300)
-    return float(radius[ink].max()), int((dark & ~still).sum())
+    return float(radius[ink].max()), int((dark & ~still).sum()), float(radius[square].max())
 
 
 def circle_crop(img: Image.Image) -> Image.Image:
@@ -274,21 +273,25 @@ def main() -> int:
     repo = Path(args.repo).resolve()
     if not (repo / "app" / "app.json").is_file():
         ap.error(f"{repo} is not a Sabeel app repository (no app/app.json)")
-    mark = calligraphy() if kind is None else Image.open(EARLIER_MARK).convert("RGBA")
+    mark = Image.open(EARLIER_MARK).convert("RGBA")
 
-    max_r, hidden = geometry(mark, kind)
-    print(f"{args.app}: " + ("calligraphy alone" if kind is None else f"{kind} badge, {2 * BADGE_R}px"))
-    print(f"  farthest ink   {max_r:6.1f} of {SAFE_R} safe")
+    max_r, hidden, square_r = geometry(mark, kind)
+    print(f"{args.app}: {kind} badge, {2 * BADGE_R}px; square icon x{SQUARE_SCALE}")
+    print(f"  farthest ink   {max_r:6.1f} of {SAFE_R} safe (adaptive)")
     print(f"  calligraphy hidden {hidden:>4} px")
+    print(f"  farthest ink   {square_r:6.1f} of {SQUARE_R} (square icon)")
     if max_r > SAFE_R:
         print(f"FAIL: ink reaches {max_r:.1f}, outside the {SAFE_R}px safe circle", file=sys.stderr)
         return 1
     if hidden:
         print(f"FAIL: the badge hides {hidden}px of calligraphy", file=sys.stderr)
         return 1
+    if square_r > SQUARE_R:
+        print(f"FAIL: the square icon's ink reaches {square_r:.1f}, past {SQUARE_R}", file=sys.stderr)
+        return 1
 
     res = repo / "app" / "android" / "app" / "src" / "main" / "res"
-    files = outputs(render(icon_svg(mark, kind)), render(icon_svg(mark, kind, background=False)),
+    files = outputs(render(icon_svg(mark, kind, scale=SQUARE_SCALE)), render(icon_svg(mark, kind, background=False)),
                     res if res.is_dir() else None)
 
     if args.check:
